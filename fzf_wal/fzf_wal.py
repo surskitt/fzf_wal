@@ -6,6 +6,7 @@ import pywal
 
 
 def hex_to_rgb(hexstring: str) -> [int, int, int]:
+    """ Convert base 16 hex (ffffff) string to rgb decimals [255,255,255] """
     if len(hexstring) < 6:
         raise ValueError('RGB hex value must be at least 6 chars')
 
@@ -16,19 +17,34 @@ def hex_to_rgb(hexstring: str) -> [int, int, int]:
     return rgb
 
 
-def rgb_string(s: str, rgb: [int, int, int], attr: str = 38):
+def rgb_string(s: str, rgb: [int, int, int], attr: str = 38) -> str:
+    """ Take a rgb decimal list and string, return a shell colour sequence """
     r, g, b = rgb
-    out = rf'\e[{attr};2;{r};{g};{b}testm'
+    out = rf'[{attr};2;{r};{g};{b}m{s}[m'
 
     return out
 
 
-def rgb_bg_string(s: str, rgb: [int, int, int]):
+def rgb_bg_string(s: str, rgb: [int, int, int]) -> str:
+    """ Return shell colour sequence for background colours """
     return rgb_string(s, rgb, 48)
+
+
+def colour_band(colours: list):
+    """ Return a string with coloured blocks for all given rgb lists """
+    out = ' '.join(rgb_string('▄', rgb) for rgb in colours)
+
+    return out
+
+
+def theme_dict_colours(d: dict):
+    """ Extract colours from wal theme dict """
+    return [d['colors'][k] for k in sorted(d['colors'])]
 
 
 def main():
     theme_files = [i.path for i in pywal.theme.list_themes()]
+    theme_dicts = [pywal.colors.file(i) for i in theme_files]
 
 
 if __name__ == '__main__':
