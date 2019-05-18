@@ -2,6 +2,7 @@
 
 """Main module."""
 
+import os
 import pywal
 
 
@@ -42,9 +43,17 @@ def theme_dict_colours(d: dict):
     return [d['colors'][k] for k in sorted(d['colors'])]
 
 
+def name_from_path(path: str):
+    dirname, fn = os.path.split(path)
+    _, shade = os.path.split(dirname)
+    name, _ = os.path.splitext(fn)
+
+    return f'{shade}/{name}'
+
+
 def main():
     theme_files = [i.path for i in pywal.theme.list_themes()]
-    theme_dicts = [pywal.colors.file(i) for i in theme_files]
+    theme_dicts = {i: pywal.colors.file(i) for i in theme_files}
 
 
 if __name__ == '__main__':

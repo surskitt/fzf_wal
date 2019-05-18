@@ -66,3 +66,12 @@ def test_theme_dict_colours():
     colours = fzf_wal.theme_dict_colours(in_dict)
 
     assert colours == expected
+
+
+def test_name_from_path():
+    path = '/a/b/c/dark/theme'
+    expected = 'dark/theme'
+
+    name = fzf_wal.name_from_path(path)
+
+    assert name == expected
