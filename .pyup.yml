@@ -1,0 +1,16 @@
+update: all
+
+pin: True
+
+schedule: "every day"
+
+search: True
+
+requirements:
+  - requirements_dev.txt:
+      # don't update dependencies, use global 'pin' default
+      update: true
+
+# allow to close stale PRs
+# default: True
+close_prs: True
