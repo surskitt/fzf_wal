@@ -7,6 +7,9 @@ schedule: "every day"
 search: True
 
 requirements:
+  - requirements.txt:
+      # don't update dependencies, use global 'pin' default
+      update: true
   - requirements_dev.txt:
       # don't update dependencies, use global 'pin' default
       update: true
