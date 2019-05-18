@@ -4,6 +4,7 @@
 """Tests for `fzf_wal` package."""
 
 import pytest
+from unittest.mock import patch
 
 import os
 
@@ -53,7 +54,7 @@ def test_rgb_bg_string():
 
 def test_color_band():
     expected = open_relative('color_band.txt')
-    colours = [[0, 0, 0]]*16
+    colours = [[0, 0, 0]]*18
     band = fzf_wal.colour_band(colours)
 
     assert expected == band
@@ -75,3 +76,30 @@ def test_name_from_path():
     name = fzf_wal.name_from_path(path)
 
     assert name == expected
+
+
+@patch('fzf_wal.fzf_wal.rgb_string')
+def test_theme_name_iter(mock_rgb_string):
+    # mock rgb_string as pass-through (returns args)
+    def mock_rgb_string_f(s, rgb, attr=38):
+        r, g, b = rgb
+        return s
+
+    mock_rgb_string.side_effect = mock_rgb_string_f
+
+    in_dict = {
+        't1': {
+            'colors': {'color0': 'aaaaaa'},
+            'special': {'foreground': 'bbbbbb', 'background': 'cccccc'}
+        },
+        't2': {
+            'colors': {'color0': 'dddddd'},
+            'special': {'foreground': 'eeeeee', 'background': 'ffffff'}
+        }
+    }
+    expected = [
+        '▄ ▄ t1',
+        '▄ ▄ t2'
+    ]
+
+    assert list(fzf_wal.theme_name_iter(in_dict)) == expected
