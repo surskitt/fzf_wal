@@ -53,7 +53,7 @@ def test_rgb_bg_string():
 
 
 def test_color_band():
-    expected = open_relative('color_band.txt')
+    expected = open_relative('colour_band.txt')
     colours = [[0, 0, 0]]*18
     band = fzf_wal.colour_band(colours)
 
@@ -78,28 +78,17 @@ def test_name_from_path():
     assert name == expected
 
 
-@patch('fzf_wal.fzf_wal.rgb_string')
-def test_theme_name_iter(mock_rgb_string):
-    # mock rgb_string as pass-through (returns args)
-    def mock_rgb_string_f(s, rgb, attr=38):
-        r, g, b = rgb
-        return s
-
-    mock_rgb_string.side_effect = mock_rgb_string_f
-
+def test_theme_name_iter():
     in_dict = {
         't1': {
-            'colors': {'color0': 'aaaaaa'},
-            'special': {'foreground': 'bbbbbb', 'background': 'cccccc'}
+            'colors': {'color0': '000000'},
+            'special': {'foreground': '000000', 'background': 'ffffff'}
         },
         't2': {
-            'colors': {'color0': 'dddddd'},
-            'special': {'foreground': 'eeeeee', 'background': 'ffffff'}
+            'colors': {'color0': '000000'},
+            'special': {'foreground': '000000', 'background': 'ffffff'}
         }
     }
-    expected = [
-        '▄ ▄ t1',
-        '▄ ▄ t2'
-    ]
+    expected = open_relative('theme_name.txt')
 
-    assert list(fzf_wal.theme_name_iter(in_dict)) == expected
+    assert '\n'.join((fzf_wal.theme_name_iter(in_dict))) == expected
