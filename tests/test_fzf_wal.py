@@ -99,3 +99,10 @@ def test_theme_name_iter():
     expected = open_relative('theme_name.txt')
 
     assert '\n'.join((fzf_wal.theme_name_iter(in_dict))) == expected
+
+
+def test_name_from_selection():
+    expected = 'test'
+    name = fzf_wal.name_from_selection(' a b c d test ')
+
+    assert name == expected

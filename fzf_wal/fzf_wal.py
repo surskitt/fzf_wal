@@ -68,6 +68,10 @@ def theme_name_iter(theme_dicts: dict):
         yield f'{preview} {name}'
 
 
+def name_from_selection(s: str) -> str:
+    return s.split()[-1].strip()
+
+
 def main():
     themes = pywal.theme.list_themes() + pywal.theme.list_themes_user()
     theme_files = {name_from_path(i): i.path for i in themes}
