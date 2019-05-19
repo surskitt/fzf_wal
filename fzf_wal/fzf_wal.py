@@ -84,7 +84,7 @@ def theme_selector(theme_dicts: dict) -> str:
     if selected is None:
         return None
 
-    return name_from_selected(selected)
+    return name_from_selection(selected)
 
 
 def main():
