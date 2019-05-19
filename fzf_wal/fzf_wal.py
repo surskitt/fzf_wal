@@ -21,7 +21,7 @@ def hex_to_rgb(hexstring: str) -> [int, int, int]:
 def rgb_string(s: str, rgb: [int, int, int], attr: str = 38) -> str:
     """ Take a rgb decimal list and string, return a shell colour sequence """
     r, g, b = rgb
-    out = rf'[{attr};2;{r};{g};{b}m{s}[m'
+    out = rf'[{attr};2;{r};{g};{b}m{s}'
 
     return out
 
@@ -29,6 +29,10 @@ def rgb_string(s: str, rgb: [int, int, int], attr: str = 38) -> str:
 def rgb_bg_string(s: str, rgb: [int, int, int]) -> str:
     """ Return shell colour sequence for background colours """
     return rgb_string(s, rgb, 48)
+
+
+def escape_colour(s):
+    return f'{s}[m'
 
 
 def colour_band(colours: list) -> str:
@@ -59,8 +63,7 @@ def theme_name_iter(theme_dicts: dict):
 
         band = colour_band(rgbs)
         fg_block = rgb_string("▄", fg_rgb)
-        preview = f'{band} {fg_block}'
-        #  preview = rgb_bg_string(f'{band} {fg_block}', bg_rgb)
+        preview = escape_colour(rgb_bg_string(f' {band} {fg_block} ', bg_rgb))
 
         yield f'{preview} {name}'
 

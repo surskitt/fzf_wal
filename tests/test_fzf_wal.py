@@ -39,17 +39,24 @@ def test_hex_to_rgb_too_short():
 
 
 def test_rgb_string():
-    expected = r'[38;2;12;34;56mtest[m'
+    expected = r'[38;2;12;34;56mtest'
     out = fzf_wal.rgb_string('test', [12, 34, 56])
 
     assert expected == out
 
 
 def test_rgb_bg_string():
-    expected = r'[48;2;12;34;56mtest[m'
+    expected = r'[48;2;12;34;56mtest'
     out = fzf_wal.rgb_bg_string('test', [12, 34, 56])
 
     assert expected == out
+
+
+def test_escape_colour():
+    expected = 'hello[m'
+    escaped = fzf_wal.escape_colour('hello')
+
+    assert escaped == expected
 
 
 def test_color_band():
