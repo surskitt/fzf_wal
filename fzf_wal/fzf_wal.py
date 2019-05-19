@@ -4,6 +4,7 @@
 
 import os
 import pywal
+from iterfzf import iterfzf
 
 
 def hex_to_rgb(hexstring: str) -> [int, int, int]:
@@ -75,13 +76,20 @@ def name_from_selection(s: str) -> str:
     return s.split()[-1].strip()
 
 
+def theme_selector(theme_dicts: dict) -> str:
+    os.environ['FZF_DEFAULT_OPTS'] = '--ansi'
+    selected = iterfzf(theme_name_iter(theme_dicts))
+    theme_name = name_from_selection(selected)
+
+    return theme_name
+
+
 def main():
     themes = pywal.theme.list_themes() + pywal.theme.list_themes_user()
     theme_files = {name_from_path(i): i.path for i in themes}
     theme_dicts = {k: pywal.colors.file(v) for k, v in theme_files.items()}
 
-    for i in theme_name_iter(theme_dicts):
-        print(i)
+    selected = theme_selector(theme_dicts)
 
 
 if __name__ == '__main__':

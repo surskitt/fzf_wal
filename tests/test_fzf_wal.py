@@ -4,7 +4,7 @@
 """Tests for `fzf_wal` package."""
 
 import pytest
-from unittest.mock import patch
+import unittest.mock
 
 import os
 
@@ -16,6 +16,20 @@ def open_relative(fn: str) -> str:
     dir_name = os.path.dirname(os.path.realpath(__file__))
     with open(os.path.join(dir_name, fn)) as f:
         return f.read()
+
+
+@pytest.fixture
+def theme_dict():
+    return {
+        't1': {
+            'colors': {'color0': '000000'},
+            'special': {'foreground': '000000', 'background': 'ffffff'}
+        },
+        't2': {
+            'colors': {'color0': '000000'},
+            'special': {'foreground': '000000', 'background': 'ffffff'}
+        }
+    }
 
 
 hex_to_rgb_params = [
@@ -85,20 +99,10 @@ def test_name_from_path():
     assert name == expected
 
 
-def test_theme_name_iter():
-    in_dict = {
-        't1': {
-            'colors': {'color0': '000000'},
-            'special': {'foreground': '000000', 'background': 'ffffff'}
-        },
-        't2': {
-            'colors': {'color0': '000000'},
-            'special': {'foreground': '000000', 'background': 'ffffff'}
-        }
-    }
+def test_theme_name_iter(theme_dict):
     expected = open_relative('theme_name.txt')
 
-    assert '\n'.join((fzf_wal.theme_name_iter(in_dict))) == expected
+    assert '\n'.join((fzf_wal.theme_name_iter(theme_dict))) == expected
 
 
 def test_name_from_selection():
@@ -106,3 +110,10 @@ def test_name_from_selection():
     name = fzf_wal.name_from_selection(' a b c d test ')
 
     assert name == expected
+
+
+@unittest.mock.patch('fzf_wal.fzf_wal.iterfzf')
+def test_theme_selector(mock_fzf, theme_dict):
+    mock_fzf.side_effect = lambda x: list(x)[0]
+
+    assert fzf_wal.theme_selector(theme_dict) == 't1'
