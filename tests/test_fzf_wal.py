@@ -117,3 +117,10 @@ def test_theme_selector(mock_fzf, theme_dict):
     mock_fzf.side_effect = lambda x: list(x)[0]
 
     assert fzf_wal.theme_selector(theme_dict) == 't1'
+
+
+@unittest.mock.patch('fzf_wal.fzf_wal.iterfzf')
+def test_theme_selector_cancelled(mock_fzf, theme_dict):
+    mock_fzf.return_value = None
+
+    assert fzf_wal.theme_selector(theme_dict) is None

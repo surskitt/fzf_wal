@@ -3,6 +3,8 @@
 """Main module."""
 
 import os
+import sys
+
 import pywal
 from iterfzf import iterfzf
 
@@ -79,9 +81,10 @@ def name_from_selection(s: str) -> str:
 def theme_selector(theme_dicts: dict) -> str:
     os.environ['FZF_DEFAULT_OPTS'] = '--ansi'
     selected = iterfzf(theme_name_iter(theme_dicts))
-    theme_name = name_from_selection(selected)
+    if selected is None:
+        return None
 
-    return theme_name
+    return name_from_selected(selected)
 
 
 def main():
