@@ -48,6 +48,7 @@ def theme_dict_colours(d: dict) -> list:
 
 
 def name_from_path(path: str) -> str:
+    """ extract shade (light/dark) and theme name from path """
     dirname, fn = os.path.split(path)
     _, shade = os.path.split(dirname)
     name, _ = os.path.splitext(fn)
@@ -56,6 +57,7 @@ def name_from_path(path: str) -> str:
 
 
 def theme_name_iter(theme_dicts: dict):
+    """ an iterable containing previews and names of themes  for fzf """
     for name, theme in theme_dicts.items():
         rgbs = [hex_to_rgb(i) for i in theme_dict_colours(theme)]
         fg, bg = theme['special']['foreground'], theme['special']['background']
@@ -69,6 +71,7 @@ def theme_name_iter(theme_dicts: dict):
 
 
 def name_from_selection(s: str) -> str:
+    """ extract theme name from fzf selection """
     return s.split()[-1].strip()
 
 
