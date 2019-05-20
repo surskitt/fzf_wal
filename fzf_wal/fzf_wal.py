@@ -79,6 +79,7 @@ def name_from_selection(s: str) -> str:
 
 
 def theme_selector(theme_dicts: dict) -> str:
+    """ Use fzf to select a theme """
     os.environ['FZF_DEFAULT_OPTS'] = '--ansi'
     selected = iterfzf(theme_name_iter(theme_dicts))
     if selected is None:
