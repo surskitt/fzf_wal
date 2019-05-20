@@ -93,6 +93,14 @@ def main():
     theme_dicts = {k: pywal.colors.file(v) for k, v in theme_files.items()}
 
     selected = theme_selector(theme_dicts)
+    if selected is None:
+        sys.exit(1)
+
+    theme = theme_dicts[selected]
+
+    pywal.sequences.send(theme)
+    pywal.export.every(theme)
+    pywal.reload.env()
 
 
 if __name__ == '__main__':

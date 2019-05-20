@@ -124,3 +124,14 @@ def test_theme_selector_cancelled(mock_fzf, theme_dict):
     mock_fzf.return_value = None
 
     assert fzf_wal.theme_selector(theme_dict) is None
+
+
+@unittest.mock.patch('fzf_wal.fzf_wal.pywal')
+@unittest.mock.patch('fzf_wal.fzf_wal.iterfzf')
+def test_fzf_cancelled_sysexit(mock_fzf, mock_pywal):
+    mock_fzf.return_value = None
+
+    with pytest.raises(SystemExit) as e:
+        fzf_wal.main()
+    assert e.type == SystemExit
+    assert e.value.code == 1
