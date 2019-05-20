@@ -89,16 +89,25 @@ def theme_selector(theme_dicts: dict) -> str:
 
 
 def main():
-    themes = pywal.theme.list_themes() + pywal.theme.list_themes_user()
+    # load all pywal themes
+    themes = (pywal.theme.list_themes() +
+              pywal.theme.list_themes(dark=False) +
+              pywal.theme.list_themes_user())
+    # create a dictionary of paths
     theme_files = {name_from_path(i): i.path for i in themes}
+    # create a dictionary of theme dictionaries
     theme_dicts = {k: pywal.colors.file(v) for k, v in theme_files.items()}
 
+    # select a theme using fzf
     selected = theme_selector(theme_dicts)
+    # if no theme was selected, exit with return status 1
     if selected is None:
         sys.exit(1)
 
+    # if theme was selected, load from dict
     theme = theme_dicts[selected]
 
+    # apply theme
     pywal.sequences.send(theme)
     pywal.export.every(theme)
     pywal.reload.env()
