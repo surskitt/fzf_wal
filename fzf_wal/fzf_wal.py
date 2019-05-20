@@ -111,7 +111,3 @@ def main():
     pywal.sequences.send(theme)
     pywal.export.every(theme)
     pywal.reload.env()
-
-
-if __name__ == '__main__':
-    main()
