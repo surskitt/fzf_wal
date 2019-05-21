@@ -18,11 +18,12 @@
 # relative to the documentation root, use os.path.abspath to make it
 # absolute, like shown here.
 #
-import fzf_wal
 
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
+
+import fzf_wal
 
 # -- General configuration ---------------------------------------------
 
@@ -130,7 +131,7 @@ latex_elements = {
 latex_documents = [
     (master_doc, 'fzf_wal.tex',
      u'fzf-wal Documentation',
-     u'"Shane Donohoe', 'manual'),
+     u'Shane Donohoe', 'manual'),
 ]
 
 
