@@ -32,7 +32,7 @@ setup(
     description="pywal theme selector using fzf",
     install_requires=requirements,
     entry_points={
-        "console_scripts": ['fzf-wal = fzf_wal.__main__:main']
+        "console_scripts": ['fzf-wal = fzf_wal.fzf_wal:main']
     },
     license="Apache Software License 2.0",
     long_description=readme + '\n\n' + history,
