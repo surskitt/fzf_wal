@@ -18,11 +18,11 @@
 # relative to the documentation root, use os.path.abspath to make it
 # absolute, like shown here.
 #
+import fzf_wal
+
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
-
-import fzf_wal
 
 # -- General configuration ---------------------------------------------
 
@@ -48,8 +48,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'fzf-wal'
-copyright = u"2019, "Shane Donohoe"
-author = u""Shane Donohoe"
+copyright = u"2019, Shane Donohoe"
+author = u"Shane Donohoe"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
@@ -158,6 +158,3 @@ texinfo_documents = [
      'One line description of project.',
      'Miscellaneous'),
 ]
-
-
-
