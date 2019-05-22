@@ -2,6 +2,7 @@
 fzf-wal
 =======
 
+.. image:: screenshot.gif
 
 .. image:: https://img.shields.io/pypi/v/fzf_wal.svg
         :target: https://pypi.python.org/pypi/fzf_wal
@@ -30,7 +31,7 @@ pywal theme selector using fzf
 Features
 --------
 
-* TODO
+* Preview and select wal themes using fzf menu
 
 Credits
 -------
