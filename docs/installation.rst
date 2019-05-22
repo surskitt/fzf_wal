@@ -14,13 +14,21 @@ To install fzf-wal, run this command in your terminal:
 
     $ pip install fzf_wal
 
+Your python version must be 3.6 or higher.
+
 This is the preferred method to install fzf-wal, as it will always install the most recent stable release.
 
 If you don't have `pip`_ installed, this `Python installation guide`_ can guide
 you through the process.
 
+To install fzf-wal to your path, you can use `pipsi`_, which will create a script in ~/.local/bin.
+
+Alternatively, for arch linux users, fzf-wal can be installed from `aur`_.
+
 .. _pip: https://pip.pypa.io
 .. _Python installation guide: http://docs.python-guide.org/en/latest/starting/installation/
+.. _pipsi: https://github.com/mitsuhiko/pipsi
+.. _aur: https://aur.archlinux.org/packages/python-fzf-wal/
 
 
 From sources
