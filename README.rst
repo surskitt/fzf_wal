@@ -33,6 +33,17 @@ Features
 
 * Preview and select wal themes using fzf menu
 
+Installation
+____________
+
+fzf-wal can be installed using:
+
+* `pip`_ (`pip install fzf-wal`)
+* From the `AUR`_
+
+.. _pip: https://pypi.org/project/fzf-wal/
+.. _AUR: https://aur.archlinux.org/packages/python-fzf-wal/
+
 Credits
 -------
 
