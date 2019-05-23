@@ -3,7 +3,7 @@ History
 =======
 
 0.1.2 (2019-05-22)
------------------
+------------------
 
 * Fix entrypoint loading main function twice
 
